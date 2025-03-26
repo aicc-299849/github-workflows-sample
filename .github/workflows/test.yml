@@ -25,7 +25,7 @@ jobs:
         run: |
           echo "TAG=${{ env.VERSION }}-$(date -d '9 hour' +'%Y%m%d%H%M%S')" >> $GITHUB_ENV
           echo "GITHUB_ENV.TAG = $GITHUB_ENV.TAG"
-          echo "env.TAG = ${{ env.TAG }}
+          echo "env.TAG = ${{ env.TAG }}"
           echo "GITHUB_WORKSPACE = $GITHUB_WORKSPACE"
           
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
