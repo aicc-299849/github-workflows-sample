@@ -6,6 +6,10 @@ name: ci-test
 on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
+env:
+  DEV_IMAGE_NAME: aicc/develop/aicc-frontend
+  IMAGE_NAME: aicc/prod/aicc-frontend
+  
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -44,5 +48,6 @@ jobs:
           echo "github.event_path = ${{ github.event_path }}"
           echo "github.base_ref = ${{ github.base_ref }}"
           echo "github.head_ref = ${{ github.head_ref }}"
+          echo "GITHUB_ENV = $GITHUB_ENV"
           
 
