@@ -9,6 +9,7 @@ on:
 env:
   DEV_IMAGE_NAME: aicc/develop/aicc-frontend
   IMAGE_NAME: aicc/prod/aicc-frontend
+  VERSION: 1.1.9
   
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
@@ -20,6 +21,11 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+      - name: Runs setting TAG
+        run: |
+          echo "TAG=${{ env.VERSION }}-$(date -d '9 hour' +'%Y%m%d%H%M%S')" >> $GITHUB_ENV
+          echo "GITHUB_WORKSPACE = $GITHUB_WORKSPACE"
+          
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
         with:
