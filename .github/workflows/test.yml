@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 env:
   DEV_IMAGE_NAME: aicc/develop/aicc-frontend
-  IMAGE_NAME: aicc/prod/aicc-frontend
+  IMAGE_NAME: aicc/aicc-frontend
   VERSION: 1.1.9
   
 
@@ -21,11 +21,15 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+      - name: "도커 이미지 레지스터리 위치 결정"
+        if: github.ref_name != 'main'
+        run: echo "DEPLOY_IMAGE_NAME=${{ env.IMAGE_NAME }}" >> $GITHUB_ENV
       - name: Runs setting TAG
         run: |
           echo "TAG=${{ env.VERSION }}-$(date -d '9 hour' +'%Y%m%d')-${{ github.run_number }}" >> $GITHUB_ENV
           echo "GITHUB_ENV.TAG = $GITHUB_ENV.TAG"
           echo "GITHUB_WORKSPACE = $GITHUB_WORKSPACE"
+          echo "DEPLOY_IMAGE_NAME = ${{ env.DEPLOY_IMAGE_NAME }}"
           
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
